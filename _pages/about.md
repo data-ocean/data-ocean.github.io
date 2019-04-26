@@ -59,11 +59,14 @@ My experience and knowledge include:
 <div class="col-md-4">
 
 <div class="sticky-top sticky-top-80">
-<h5>Current & Past</h5>
+<h5>Contact</h5>
 
-<p>Thank you for checking our my blog! For more data science stuff I have done since October 2018, head over to  <a target="_blank" href="https://github.com/osterburg">github <i class="fab fa-github"></i></a>.</p>
+<p>Tech: <a target="_blank" href="https://github.com/osterburg">github <i class="fab fa-github"></i></a>.</p>
 
-<p>Head over to <a target="_blank" href="https://linkedin.com/in/stephanosterburg">linkedin <i class="fab fa-linkedin"></i></a> for more information about me.</p>
+<p>Resume: <a target="_blank" href="https://linkedin.com/in/stephanosterburg">linkedin <i class="fab fa-linkedin"></i></a>.</p>
+
+<p>Email: <a href="mailto:stephan.osterburg@icloud.com">stephan.osterburg@icloud.com</a></p>
+
 
 <!-- <a target="_blank" href="https://www.wowthemes.net/donate/" class="btn btn-danger">Buy me a coffee</a> <a target="_blank" href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/" class="btn btn-warning">Documentation</a> -->
 
