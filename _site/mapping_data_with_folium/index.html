@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="icon" href="/data-ocean.github.io/assets/images/logo.png">
+
+<title>Mapping Data with folium | Data Ocean</title>
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Mapping Data with folium | Data Ocean</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Mapping Data with folium" />
+<meta name="author" content="stephan" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Visualising city data" />
+<meta property="og:description" content="Visualising city data" />
+<link rel="canonical" href="http://localhost:4000/data-ocean.github.io/mapping_data_with_folium/" />
+<meta property="og:url" content="http://localhost:4000/data-ocean.github.io/mapping_data_with_folium/" />
+<meta property="og:site_name" content="Data Ocean" />
+<meta property="og:image" content="http://localhost:4000/data-ocean.github.io/assets/images/9background.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-12-07T00:00:00-08:00" />
+<script type="application/ld+json">
+{"image":"http://localhost:4000/data-ocean.github.io/assets/images/9background.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/data-ocean.github.io/mapping_data_with_folium/"},"url":"http://localhost:4000/data-ocean.github.io/mapping_data_with_folium/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/data-ocean.github.io/assets/images/logo.jpeg"},"name":"stephan"},"author":{"@type":"Person","name":"stephan"},"headline":"Mapping Data with folium","description":"Visualising city data","datePublished":"2018-12-07T00:00:00-08:00","dateModified":"2018-12-07T00:00:00-08:00","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<link href="/data-ocean.github.io/assets/css/screen.css" rel="stylesheet">
+
+<link href="/data-ocean.github.io/assets/css/main.css" rel="stylesheet">
+
+<script src="/data-ocean.github.io/assets/js/jquery.min.js"></script>
+
+<!-- mathjax config similar to math.stackexchange -->
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+
+</head>
+
+
+
+
+<body class="layout-post">
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	</noscript>
+
+
+<!-- Begin Menu Navigation
+================================================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+
+    <div class="container pr-0">
+
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/data-ocean.github.io/">
+    <img src="/data-ocean.github.io/assets/images/logo.jpeg" alt="Data Ocean">
+    </a>
+    <!-- End Logo -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+
+        <!-- Begin Menu -->
+
+            <ul class="navbar-nav ml-auto">
+
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/data-ocean.github.io/index.html">Blog</a>
+                </li>
+
+                <li class="nav-item">
+                <a class="nav-link" href="/data-ocean.github.io/about">About</a>
+                </li>
+<!--
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/"> Docs</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://www.wowthemes.net/themes/mediumish-wordpress/"><i class="fab fa-wordpress-simple"></i> WP Version</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://www.wowthemes.net/themes/mediumish-ghost/"><i class="fab fa-snapchat-ghost"></i> Ghost Version</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://github.com/wowthemesnet/mediumish-theme-jekyll"><i class="fab fa-github"></i> Fork on Github</a>
+                </li>
+-->
+
+                <script src="/data-ocean.github.io/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/data-ocean.github.io/assets/js/lunrsearchengine.js"></script>
+
+            </ul>
+
+        <!-- End Menu -->
+
+    </div>
+
+    </div>
+</nav>
+<!-- End Navigation
+================================================== -->
+
+<div class="site-content">
+
+<div class="container">
+
+<!-- Site Title
+================================================== -->
+<div class="mainheading">
+    <h1 class="sitetitle">Data Ocean</h1>
+    <p class="lead">
+        A discovery into the world of data.
+    </p>
+</div>
+
+<!-- Content
+================================================== -->
+<div class="main-content">
+    <!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=Mapping Data with folium&url=http://localhost:4000/data-ocean.github.io/mapping_data_with_folium/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=http://localhost:4000/data-ocean.github.io/mapping_data_with_folium/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/data-ocean.github.io/mapping_data_with_folium/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    <!-- 
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+     -->
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                <div class="row post-top-meta">
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="/data-ocean.github.io/assets/images/avatar.jpg" alt="Stephan">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="https://data-ocean.github.io">Stephan</a><a target="_blank" href="https://twitter.com/sosterburg" class="btn follow">Follow</a>
+                        <span class="author-description">Computer graphics veteran with 30+ years experience on the quest to discover the world of data.</span>
+                    </div>
+                </div>
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">Mapping Data with folium</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="http://localhost:4000/data-ocean.github.io/assets/images/9background.jpg" alt="Mapping Data with folium">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <p>For my first Data Science project at Flatiron, we got the King County Housing dataset from Kaggle to work with.</p>
+
+<p>I first wanted to know where King County is. Is the county in a rural area, suburban area or just a big city like New York or a combination of some or all of them. To get a basic understanding and feel for what is the data represents. After going through the scrubbing part and dealing with the not so clean data handed, and having a better understanding of what is in the dataset, which leads me to the following questions:</p>
+
+<ul>
+  <li>Is location of a house by zip code (neighbourhood) an indicator for the house price?</li>
+  <li>Do zip codes (neighbourhoods) with the higher housing density have an effect on selling price?</li>
+</ul>
+
+<p>Also, what visualisation technique should or can I use to present it best? My choice was to use a map to visualise the data. For that, I picked the folium package.</p>
+
+<p>The dataset has (not all) the zip codes for King County. To visualise the zip codes, we need the geojson data. Which we luckily can find on the King County website.</p>
+
+<p>First, we want to get all zip codes in the dataset into a separate dataset.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Set zipcode type to string (folium)
+</span><span class="n">dataset</span><span class="p">[</span><span class="s">'zipcode'</span><span class="p">]</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s">'zipcode'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'str'</span><span class="p">)</span>
+<span class="err">​</span>
+<span class="c1"># get the mean value across all data points
+</span><span class="n">zipcode_data</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">'zipcode'</span><span class="p">)</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
+<span class="n">zipcode_data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>For this example, we want to display the housing density. So we need to sum all zip codes up and add it to our zipcode_data.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># count number of houses grouped by zipcode
+</span><span class="n">dataset</span><span class="p">[</span><span class="s">'count'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">'zipcode'</span><span class="p">)</span><span class="o">.</span><span class="nb">sum</span><span class="p">()</span>
+<span class="n">temp</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">temp</span><span class="p">[[</span><span class="s">'zipcode'</span><span class="p">,</span> <span class="s">'count'</span><span class="p">]]</span>
+<span class="n">zipcode_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">zipcode_data</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s">'zipcode'</span><span class="p">)</span>
+<span class="err">​</span>
+<span class="c1"># drop count from org dataset
+</span><span class="n">dataset</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s">'count'</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Before we move on to display “all” zip codes in our dataset, we want to make sure that the geodata has only the zip codes found in our dataset. (Note, this code is not my brainchild).</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Get geo data file path
+</span><span class="n">geo_data_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">'data'</span><span class="p">,</span> <span class="s">'king_county_wa_zipcode_area.geojson'</span><span class="p">)</span>
+<span class="c1"># load GeoJSON
+</span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">geo_data_file</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">jsonFile</span><span class="p">:</span>
+    <span class="n">geo_data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">jsonFile</span><span class="p">)</span>
+
+<span class="n">tmp</span> <span class="o">=</span> <span class="n">geo_data</span>
+<span class="err">​</span>
+<span class="c1"># remove ZIP codes not in geo data
+</span><span class="n">geozips</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="s">'features'</span><span class="p">])):</span>
+    <span class="k">if</span> <span class="n">tmp</span><span class="p">[</span><span class="s">'features'</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="s">'properties'</span><span class="p">][</span><span class="s">'ZIPCODE'</span><span class="p">]</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">zipcode_data</span><span class="p">[</span><span class="s">'zipcode'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()):</span>
+        <span class="n">geozips</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tmp</span><span class="p">[</span><span class="s">'features'</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+
+<span class="c1"># creating new JSON object
+</span><span class="n">new_json</span> <span class="o">=</span> <span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">([</span><span class="s">'type'</span><span class="p">,</span><span class="s">'features'</span><span class="p">])</span>
+<span class="n">new_json</span><span class="p">[</span><span class="s">'type'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'FeatureCollection'</span>
+<span class="n">new_json</span><span class="p">[</span><span class="s">'features'</span><span class="p">]</span> <span class="o">=</span> <span class="n">geozips</span>
+<span class="err">​</span>
+<span class="c1"># save uodated JSON object
+</span><span class="nb">open</span><span class="p">(</span><span class="s">"cleaned_geodata.json"</span><span class="p">,</span> <span class="s">"w"</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">new_json</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s">','</span><span class="p">,</span> <span class="s">': '</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>Finally, we have our function to display our map and housing density. I wrote it as a function I that I could easily visualise other features like house prices.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">map_feature_by_zipcode</span><span class="p">(</span><span class="n">zipcode_data</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+    <span class="s">""" Generates a folium map of Seattle
+    :param zipcode_data: zipcode dataset
+    :param col: feature to display
+    :return: m
+    """</span>
+<span class="err">​</span>
+    <span class="c1"># read updated geo data
+</span>    <span class="n">king_geo</span> <span class="o">=</span> <span class="s">"cleaned_geodata.json"</span>
+<span class="err">​</span>
+    <span class="c1"># Initialize Folium Map with Seattle latitude and longitude
+</span>    <span class="n">m</span> <span class="o">=</span> <span class="n">folium</span><span class="o">.</span><span class="n">Map</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="p">[</span><span class="mf">47.35</span><span class="p">,</span> <span class="o">-</span><span class="mf">121.9</span><span class="p">],</span> <span class="n">zoom_start</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+                   <span class="n">detect_retina</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">control_scale</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="err">​</span>
+    <span class="c1"># Create choropleth map
+</span>    <span class="n">m</span><span class="o">.</span><span class="n">choropleth</span><span class="p">(</span>
+        <span class="n">geo_data</span><span class="o">=</span><span class="n">king_geo</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s">'choropleth'</span><span class="p">,</span>
+        <span class="n">data</span><span class="o">=</span><span class="n">zipcode_data</span><span class="p">,</span>
+        <span class="c1"># col: feature of interest
+</span>        <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">'zipcode'</span><span class="p">,</span> <span class="n">col</span><span class="p">],</span>
+        <span class="n">key_on</span><span class="o">=</span><span class="s">'feature.properties.ZIPCODE'</span><span class="p">,</span>
+        <span class="n">fill_color</span><span class="o">=</span><span class="s">'OrRd'</span><span class="p">,</span>
+        <span class="n">fill_opacity</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
+        <span class="n">line_opacity</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>
+        <span class="n">legend_name</span><span class="o">=</span><span class="s">'house '</span> <span class="o">+</span> <span class="n">col</span>
+    <span class="p">)</span>
+<span class="err">​</span>
+    <span class="n">folium</span><span class="o">.</span><span class="n">LayerControl</span><span class="p">()</span><span class="o">.</span><span class="n">add_to</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+<span class="err">​</span>
+    <span class="c1"># Save map based on feature of interest
+</span>    <span class="n">m</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">col</span> <span class="o">+</span> <span class="s">'.html'</span><span class="p">)</span>
+<span class="err">​</span>
+    <span class="k">return</span> <span class="n">m</span>
+</code></pre></div></div>
+
+<p>…and our function call.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span><span class="o">.</span><span class="n">map_feature_by_zipcode</span><span class="p">(</span><span class="n">zipcode_data</span><span class="p">,</span> <span class="s">'count'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><img src="/data-ocean.github.io/assets/images/seattle_density_map.png" alt="seattle_density_map" /></p>
+
+<p>The main strength I can see in our case is that we can answer our question regarding housing density by zip code.</p>
+
+<p>The weakness here, unfortunately, lies in our given dataset itself. Because we only have a subset of about 22k houses represented. Another weakness I can see is. House prices are not so much related to zip codes, instead to neighbourhoods. If we go and look at Zillow, we can search by neighbourhood. Moreover, Zillow offers a geojson file for that.</p>
+
+<p>However, I guess I get myself over my head here.</p>
+
+            </div>
+
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2018-12-07">07 Dec 2018</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/data-ocean.github.io/categories#code">code</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/data-ocean.github.io/categories#data">data</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/data-ocean.github.io/categories#map">map</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="http://localhost:4000/data-ocean.github.io/why/"> &laquo; “Why did you decide to learn data science?”</a>
+            
+            
+            <a class="next d-block col-md-6 text-lg-right" href="http://localhost:4000/data-ocean.github.io/bayes_theorem/">Bayes' Theorem &raquo; </a>
+            
+            <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <!-- <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = '';
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section> -->
+
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+</div>
+
+
+
+</div>
+
+<!-- Categories Jumbotron
+================================================== -->
+<div class="jumbotron fortags">
+	<div class="d-md-flex h-100">
+		<div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div class="d-md-flex align-items-center justify-content-center h-100">
+                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
+            </div>
+		</div>
+		<div class="col-md-8 p-5 align-self-center text-center">
+            
+            
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#data">data (9)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#code">code (9)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#map">map (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#Bayes">Bayes (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#beginner">beginner (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#forest">forest (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#art">art (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#deep-learning">deep learning (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#diffusion-maps">diffusion maps (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#papers">papers (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#content">content (3)</a>
+                
+            
+            
+		</div>
+	</div>
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                Copyright © 2019 Data Ocean
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">
+                <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts
+================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="/data-ocean.github.io/assets/js/mediumish.js"></script>
+
+
+<script src="/data-ocean.github.io/assets/js/lazyload.js"></script>
+
+
+<script src="/data-ocean.github.io/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+<script id="dsq-count-scr" src="//.disqus.com/count.js"></script>
+
+
+</body>
+</html>

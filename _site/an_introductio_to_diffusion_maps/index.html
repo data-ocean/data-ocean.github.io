@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="icon" href="/data-ocean.github.io/assets/images/logo.png">
+
+<title>A short introduction to Diffusion Maps | Data Ocean</title>
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>A short introduction to Diffusion Maps | Data Ocean</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="A short introduction to Diffusion Maps" />
+<meta name="author" content="stephan" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An interpretation of the paper" />
+<meta property="og:description" content="An interpretation of the paper" />
+<link rel="canonical" href="http://localhost:4000/data-ocean.github.io/an_introductio_to_diffusion_maps/" />
+<meta property="og:url" content="http://localhost:4000/data-ocean.github.io/an_introductio_to_diffusion_maps/" />
+<meta property="og:site_name" content="Data Ocean" />
+<meta property="og:image" content="http://localhost:4000/data-ocean.github.io/assets/images/diffusion_map.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-02-23T00:00:00-08:00" />
+<script type="application/ld+json">
+{"image":"http://localhost:4000/data-ocean.github.io/assets/images/diffusion_map.png","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/data-ocean.github.io/an_introductio_to_diffusion_maps/"},"url":"http://localhost:4000/data-ocean.github.io/an_introductio_to_diffusion_maps/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/data-ocean.github.io/assets/images/logo.jpeg"},"name":"stephan"},"author":{"@type":"Person","name":"stephan"},"headline":"A short introduction to Diffusion Maps","description":"An interpretation of the paper","datePublished":"2019-02-23T00:00:00-08:00","dateModified":"2019-02-23T00:00:00-08:00","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<link href="/data-ocean.github.io/assets/css/screen.css" rel="stylesheet">
+
+<link href="/data-ocean.github.io/assets/css/main.css" rel="stylesheet">
+
+<script src="/data-ocean.github.io/assets/js/jquery.min.js"></script>
+
+<!-- mathjax config similar to math.stackexchange -->
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+
+</head>
+
+
+
+
+<body class="layout-post">
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	</noscript>
+
+
+<!-- Begin Menu Navigation
+================================================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+
+    <div class="container pr-0">
+
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/data-ocean.github.io/">
+    <img src="/data-ocean.github.io/assets/images/logo.jpeg" alt="Data Ocean">
+    </a>
+    <!-- End Logo -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+
+        <!-- Begin Menu -->
+
+            <ul class="navbar-nav ml-auto">
+
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/data-ocean.github.io/index.html">Blog</a>
+                </li>
+
+                <li class="nav-item">
+                <a class="nav-link" href="/data-ocean.github.io/about">About</a>
+                </li>
+<!--
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/"> Docs</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://www.wowthemes.net/themes/mediumish-wordpress/"><i class="fab fa-wordpress-simple"></i> WP Version</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://www.wowthemes.net/themes/mediumish-ghost/"><i class="fab fa-snapchat-ghost"></i> Ghost Version</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://github.com/wowthemesnet/mediumish-theme-jekyll"><i class="fab fa-github"></i> Fork on Github</a>
+                </li>
+-->
+
+                <script src="/data-ocean.github.io/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/data-ocean.github.io/assets/js/lunrsearchengine.js"></script>
+
+            </ul>
+
+        <!-- End Menu -->
+
+    </div>
+
+    </div>
+</nav>
+<!-- End Navigation
+================================================== -->
+
+<div class="site-content">
+
+<div class="container">
+
+<!-- Site Title
+================================================== -->
+<div class="mainheading">
+    <h1 class="sitetitle">Data Ocean</h1>
+    <p class="lead">
+        A discovery into the world of data.
+    </p>
+</div>
+
+<!-- Content
+================================================== -->
+<div class="main-content">
+    <!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=A short introduction to Diffusion Maps&url=http://localhost:4000/data-ocean.github.io/an_introductio_to_diffusion_maps/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=http://localhost:4000/data-ocean.github.io/an_introductio_to_diffusion_maps/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/data-ocean.github.io/an_introductio_to_diffusion_maps/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    <!-- 
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+     -->
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                <div class="row post-top-meta">
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="/data-ocean.github.io/assets/images/avatar.jpg" alt="Stephan">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="https://data-ocean.github.io">Stephan</a><a target="_blank" href="https://twitter.com/sosterburg" class="btn follow">Follow</a>
+                        <span class="author-description">Computer graphics veteran with 30+ years experience on the quest to discover the world of data.</span>
+                    </div>
+                </div>
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">A short introduction to Diffusion Maps</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="http://localhost:4000/data-ocean.github.io/assets/images/diffusion_map.png" alt="A short introduction to Diffusion Maps">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <p>The <a href="https://inside.mines.edu/~whereman/talks/delaPorte-Herbst-Hereman-vanderWalt-DiffusionMaps-PRASA2008.pdf">paper</a> published by J. de la Porte<sup id="fnref:4"><a href="#fn:4" class="footnote">1</a></sup>, B. M. Herbst<sup id="fnref:4:1"><a href="#fn:4" class="footnote">1</a></sup>, W. Hereman<sup id="fnref:5"><a href="#fn:5" class="footnote">2</a></sup> and S. J. van der Walt<sup id="fnref:4:2"><a href="#fn:4" class="footnote">1</a></sup> in November 2008 describes the mathematical technique for dealing with reducing dimensionality in data. In that paper, the authors give an overview of three well-known dimensionality reduction techniques and introduce diffusion maps and its functionality, process and how it compares with the other methods.</p>
+
+<h3 id="dimensionality-reduction">Dimensionality Reduction</h3>
+
+<p>We are limited in visualising information beyond the third dimension. For simplicity reasons, imagine a black and white image (grey scale) of 100 by 100 pixels, where each pixel represents a variable. The dimensionality would add up to be 10,000. A <strong>human</strong> would not have any issues with reading the following digits in the picture below, but a <strong>computer</strong> sees them as a data point in an <em>nm</em>-dimensional coordinate space.</p>
+
+<p><img src="/data-ocean.github.io/assets/images/Two-images-of-the-same-digit-at-different-rotation-angles.png" alt="Dimensionality Reduction" /></p>
+
+<p>Dimensionality reduction is about converting data of very high dimensionality into data of lower dimensionality while preserving the original information. We can achieve these if one would be able to measure the distance between data points on the manifold itself instead of in Euclidean space by taking into account the data global space.</p>
+
+<p>We can use the analogy of zipping text files, compressing large text data into smaller equivalent data. With the minor but significant difference that in dimensionality reduction we will lose some information. The goal here is to not lose too many of the essential features in the data.</p>
+
+<h3 id="popular-techniques">Popular Techniques</h3>
+
+<p>The most popular reduction methods are</p>
+
+<ul>
+  <li>Principle Component Analysis (PCA)<sup id="fnref:6"><a href="#fn:6" class="footnote">3</a></sup>, a linear dimensionality reduction technique using Singular Value Decomposition of the data to project it to a lower dimensional space.<sup id="fnref:7"><a href="#fn:7" class="footnote">4</a></sup></li>
+  <li>Multi-dimensional Scaling (MDS)<sup id="fnref:8"><a href="#fn:8" class="footnote">5</a></sup> seeks a low-dimensional representation of the data in which the distances respect well the distances in the original high-dimensional space.<sup id="fnref:9"><a href="#fn:9" class="footnote">6</a></sup></li>
+  <li>Isometric Feature Map (Isomap)<sup id="fnref:10"><a href="#fn:10" class="footnote">7</a></sup>, a non-linear dimensionality reduction through Isometric Mapping.<sup id="fnref:11"><a href="#fn:11" class="footnote">8</a></sup></li>
+</ul>
+
+<h3 id="diffusion-maps">Diffusion Maps</h3>
+
+<p>Diffusion maps are a non-linear technique. Similar to taking a random walk on our data, where we jump between data points in feature space (see image below), we  are analysing the connectivity of the data. The goal is to reveal the geometric structure of our data at different scales, defining a “time-dependent” diffusion metrics.</p>
+
+<p><img src="/data-ocean.github.io/assets/images/A-random-walk-on-a-data-set-Each-jump-has-a-probability-associated-with-it-The-green.png" alt="Diffusion Maps" /></p>
+
+<p>By measuring the distances between data points (i.e. Euclidean space), we can define neighbourhoods. In order to achieve it, we define a threshold value in the way of a function (kernel) to obtain the similarity within the geometric structure, which allows us to preserve the underlying information of the given data and be able to connect each neighbourhood.</p>
+
+<p>The basic diffusion mapping algorithm can be defined as follows:</p>
+
+<p>INPUT: High dimensional data set</p>
+
+<ol>
+  <li>Define a kernel, <script type="math/tex">k(x, y)</script> and create a kernel matrix, <script type="math/tex">K</script>, such that <script type="math/tex">K_{i,j} = k(X_i, X_j)</script>.</li>
+  <li>Create the diffusion matrix by normalising the rows of the kernel matrix</li>
+  <li>Calculate the eigenvectors of the diffusion matrix.</li>
+  <li>Map to the <script type="math/tex">d</script>-dimensional diffusion space at time <script type="math/tex">t</script>, using the <script type="math/tex">d</script> dominant eigenvectors and -values</li>
+</ol>
+
+<p>OUTPUT: Lower dimensional data set</p>
+
+<h3 id="comparison">Comparison</h3>
+
+<p>The authors also investigated the performance of the different algorithms using a data set with an underlying C-shape for the change of the parameters. As for PCA, once the data is projected onto the two primary axes of variation the ordering of the data along the non-linear C-shape is lost and fails to detect a single parameter. MDS makes a better job in preserving data points in Euclidean space but due to the non-linear structure of the data, MDS cannot preserve the underlying clusters.</p>
+
+<h3 id="conclusion">Conclusion</h3>
+
+<p>Diffusion mapping is more robust to noise perturbation and is the only technique that allows geometric analysis at different scales.</p>
+
+<hr />
+
+<h5 id="footnotes">Footnotes</h5>
+<div class="footnotes">
+  <ol>
+    <li id="fn:4">
+      <p>Applied Mathematics Division, Department of Mathematical Sciences, University of Stellenbosch, South Africa <a href="#fnref:4" class="reversefootnote">&#8617;</a> <a href="#fnref:4:1" class="reversefootnote">&#8617;<sup>2</sup></a> <a href="#fnref:4:2" class="reversefootnote">&#8617;<sup>3</sup></a></p>
+    </li>
+    <li id="fn:5">
+      <p>Colorado School of Mines, United States of America <a href="#fnref:5" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:6">
+      <p>I.T. Jolliffe. Principal component analysis. Springer Verlag New York, 1986. <a href="#fnref:6" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:7">
+      <p><a href="https://scikit-learn.org/stable/modules/decomposition.html#pca">https://scikit-learn.org/stable/modules/decomposition.html#pca</a> <a href="#fnref:7" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:8">
+      <p>W.S. Torgerson. Multidimensional scaling: I. Theory and method. Psychometrika, 17(4):401–419, 1952. <a href="#fnref:8" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:9">
+      <p><a href="https://scikit-learn.org/stable/modules/manifold.html#multidimensional-scaling">https://scikit-learn.org/stable/modules/manifold.html#multidimensional-scaling</a> <a href="#fnref:9" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:10">
+      <p>Joshua B. Tenenbaum, Vin de Silva, and John C. Langford. A Global Geometric Framework for Nonlinear Dimensionality Reduction. Science, 290(5500):2319–2323, 2000. <a href="#fnref:10" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:11">
+      <p><a href="https://scikit-learn.org/stable/modules/manifold.html#isomap">https://scikit-learn.org/stable/modules/manifold.html#isomap</a> <a href="#fnref:11" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+            </div>
+
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2019-02-23">23 Feb 2019</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/data-ocean.github.io/categories#code">code</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/data-ocean.github.io/categories#data">data</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/data-ocean.github.io/categories#diffusion-maps">diffusion maps</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/data-ocean.github.io/categories#papers">papers</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="http://localhost:4000/data-ocean.github.io/deep_learning_art_images/"> &laquo; Deep Learning and Art Images</a>
+            
+            
+            <a class="next d-block col-md-6 text-lg-right" href="http://localhost:4000/data-ocean.github.io/text_classification_part_1/">Text Classification (Part 1) &raquo; </a>
+            
+            <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <!-- <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = '';
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section> -->
+
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+</div>
+
+
+
+</div>
+
+<!-- Categories Jumbotron
+================================================== -->
+<div class="jumbotron fortags">
+	<div class="d-md-flex h-100">
+		<div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div class="d-md-flex align-items-center justify-content-center h-100">
+                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
+            </div>
+		</div>
+		<div class="col-md-8 p-5 align-self-center text-center">
+            
+            
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#data">data (9)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#code">code (9)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#map">map (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#Bayes">Bayes (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#beginner">beginner (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#forest">forest (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#art">art (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#deep-learning">deep learning (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#diffusion-maps">diffusion maps (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#papers">papers (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#content">content (3)</a>
+                
+            
+            
+		</div>
+	</div>
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                Copyright © 2019 Data Ocean
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">
+                <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts
+================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="/data-ocean.github.io/assets/js/mediumish.js"></script>
+
+
+<script src="/data-ocean.github.io/assets/js/lazyload.js"></script>
+
+
+<script src="/data-ocean.github.io/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+<script id="dsq-count-scr" src="//.disqus.com/count.js"></script>
+
+
+</body>
+</html>

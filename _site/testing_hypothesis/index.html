@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="icon" href="/data-ocean.github.io/assets/images/logo.png">
+
+<title>Testing Hypothesis | Data Ocean</title>
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Testing Hypothesis | Data Ocean</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Testing Hypothesis" />
+<meta name="author" content="stephan" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The Art of Asking" />
+<meta property="og:description" content="The Art of Asking" />
+<link rel="canonical" href="http://localhost:4000/data-ocean.github.io/testing_hypothesis/" />
+<meta property="og:url" content="http://localhost:4000/data-ocean.github.io/testing_hypothesis/" />
+<meta property="og:site_name" content="Data Ocean" />
+<meta property="og:image" content="http://localhost:4000/data-ocean.github.io/assets/images/programming-languages-learn-header-image.jpg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2018-12-17T00:00:00-08:00" />
+<script type="application/ld+json">
+{"image":"http://localhost:4000/data-ocean.github.io/assets/images/programming-languages-learn-header-image.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/data-ocean.github.io/testing_hypothesis/"},"url":"http://localhost:4000/data-ocean.github.io/testing_hypothesis/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/data-ocean.github.io/assets/images/logo.jpeg"},"name":"stephan"},"author":{"@type":"Person","name":"stephan"},"headline":"Testing Hypothesis","description":"The Art of Asking","datePublished":"2018-12-17T00:00:00-08:00","dateModified":"2018-12-17T00:00:00-08:00","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<link href="/data-ocean.github.io/assets/css/screen.css" rel="stylesheet">
+
+<link href="/data-ocean.github.io/assets/css/main.css" rel="stylesheet">
+
+<script src="/data-ocean.github.io/assets/js/jquery.min.js"></script>
+
+<!-- mathjax config similar to math.stackexchange -->
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+
+</head>
+
+
+
+
+<body class="layout-post">
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	</noscript>
+
+
+<!-- Begin Menu Navigation
+================================================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+
+    <div class="container pr-0">
+
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/data-ocean.github.io/">
+    <img src="/data-ocean.github.io/assets/images/logo.jpeg" alt="Data Ocean">
+    </a>
+    <!-- End Logo -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+
+        <!-- Begin Menu -->
+
+            <ul class="navbar-nav ml-auto">
+
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/data-ocean.github.io/index.html">Blog</a>
+                </li>
+
+                <li class="nav-item">
+                <a class="nav-link" href="/data-ocean.github.io/about">About</a>
+                </li>
+<!--
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/"> Docs</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://www.wowthemes.net/themes/mediumish-wordpress/"><i class="fab fa-wordpress-simple"></i> WP Version</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://www.wowthemes.net/themes/mediumish-ghost/"><i class="fab fa-snapchat-ghost"></i> Ghost Version</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://github.com/wowthemesnet/mediumish-theme-jekyll"><i class="fab fa-github"></i> Fork on Github</a>
+                </li>
+-->
+
+                <script src="/data-ocean.github.io/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/data-ocean.github.io/assets/js/lunrsearchengine.js"></script>
+
+            </ul>
+
+        <!-- End Menu -->
+
+    </div>
+
+    </div>
+</nav>
+<!-- End Navigation
+================================================== -->
+
+<div class="site-content">
+
+<div class="container">
+
+<!-- Site Title
+================================================== -->
+<div class="mainheading">
+    <h1 class="sitetitle">Data Ocean</h1>
+    <p class="lead">
+        A discovery into the world of data.
+    </p>
+</div>
+
+<!-- Content
+================================================== -->
+<div class="main-content">
+    <!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=Testing Hypothesis&url=http://localhost:4000/data-ocean.github.io/testing_hypothesis/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=http://localhost:4000/data-ocean.github.io/testing_hypothesis/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/data-ocean.github.io/testing_hypothesis/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    <!-- 
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+     -->
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                <div class="row post-top-meta">
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="/data-ocean.github.io/assets/images/avatar.jpg" alt="Stephan">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="https://data-ocean.github.io">Stephan</a><a target="_blank" href="https://twitter.com/sosterburg" class="btn follow">Follow</a>
+                        <span class="author-description">Computer graphics veteran with 30+ years experience on the quest to discover the world of data.</span>
+                    </div>
+                </div>
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">Testing Hypothesis</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="http://localhost:4000/data-ocean.github.io/assets/images/programming-languages-learn-header-image.jpg" alt="Testing Hypothesis">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <p>When we are talking about hypothesis testing, what we are merely trying to do is reframing a qualitative question into a mathematical problem. For example, we might ask:</p>
+
+<p><em>Do discounts have a statistically significant effect on the number of products customers order? If so, at what level(s) of discount?</em></p>
+
+<p>And reframe it to:</p>
+
+<p><script type="math/tex">H_0: \mu_{\text{discounts}} \leq \mu_{\text{no discounts}}</script>, the mean of the amount sold in orders with discounts is less or equal to the mean of the amount sold in orders without discounts.</p>
+
+<p>Our goal usually is to reject our formulated null hypothesis by calculating the p-value which we generally want to be <strong>p &lt; 0.05</strong>   (i.e., there’s only a 5% chance that two identical distributions could have produced these results).</p>
+
+<h2 id="what-type-of-data-do-we-have-categorical-or-numerical">What type of data do we have? Categorical or Numerical?</h2>
+
+<p>We first want to find out what type of data we are dealing with whether it is continuous or categorical. For example, we want to find the mean height of all boys in a school year, and we could be very very accurate and measure every boy to the n-th digit after the comma. In this case, we are dealing with continuous (numerical) data. On the other hand, we have categorical data if we want to know if the girls have a significant different preference in what type of fruit (apple, bananas, plums etc) they eat.</p>
+
+<h2 id="how-many-samples-am-i-comparing">How many samples am I comparing?</h2>
+
+<ul>
+  <li>1 Sample i.e., comparing an actual result against a desired target</li>
+  <li>2 Sample i.e., comparing a control and treatment group or an A/B test</li>
+  <li>More than 2 Sample i.e., comparing three different variants of a landing page</li>
+</ul>
+
+<p><img src="/data-ocean.github.io/assets/images/hypothesis_test_small.jpg" alt="Hypothesis Testing" /></p>
+
+<h3 id="1-sample-t-test">1 Sample T-Test</h3>
+
+<p>Compares a sample mean to a hypothetical population mean. It answers the question “What is the probability that the sample came from a distribution with the desired mean?” Use this when you are comparing against a known target (like a statistic from a paper or a target metric).</p>
+
+<p><strong>ttest_1samp</strong> requires two inputs, a distribution of values and an expected mean:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">tstat</span><span class="p">,</span> <span class="n">pval</span> <span class="o">=</span> <span class="n">ttest_1samp</span><span class="p">(</span><span class="n">example_distribution</span><span class="p">,</span> <span class="n">expected_mean</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">pval</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="2-sample-t-test">2 Sample T-Test</h3>
+<p>A 2 Sample T-Test compares two sets of data, which are both approximately normally distributed.The null hypothesis, in this case, is that the two distributions have the same mean. Use this when you are comparing two different numerical samples.</p>
+
+<p><strong>ttest_ind</strong> requires two distributions of values:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">tstat</span><span class="p">,</span> <span class="n">pval</span> <span class="o">=</span> <span class="n">ttest_ind</span><span class="p">(</span><span class="n">example_distribution1</span><span class="p">,</span> <span class="n">example_distribution2</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">pval</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="anova">ANOVA</h3>
+<p>ANOVA compares 2 or more numerical datasets without increasing the probability of a false positive. In order to use ANOVA, The samples are independent. Each sample is from a normally distributed population.The population standard deviations of the groups are all equal. This property is known as homoscedasticity.</p>
+
+<p><strong>f_oneway</strong> (scipy.stats) requires two or more groups:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">fstat</span><span class="p">,</span> <span class="n">pval</span> <span class="o">=</span> <span class="n">f_oneway</span><span class="p">(</span><span class="n">data_group1</span><span class="p">,</span> <span class="n">data_group2</span><span class="p">,</span> <span class="n">data_group3</span><span class="p">,</span> <span class="n">data_groupN</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">pval</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><strong>ols</strong> (statsmodels)</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">model_name</span> <span class="o">=</span> <span class="n">ols</span><span class="p">(</span><span class="s">'outcome_variable ~ group1 + group2 + groupN'</span><span class="p">,</span>
+                     <span class="n">data</span><span class="o">=</span><span class="n">your_data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="n">model_name</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="tukey">Tukey</h3>
+<p>Tukey’s Range Test compares more than 2 numerical datasets without increasing the probability of a false positive. Unlike ANOVA, Tukey tells us which datasets are significantly different. Many statisticians use Tukey instead of Anova. Note: pairwise_tukeyhsd is from StatsModels, not SciPy!</p>
+
+<p><strong>pairwise_tukeyhsd#</strong> requires three arguments:</p>
+<ul>
+  <li>A vector of all data (concatenated using np.concatenate)</li>
+  <li>A vector of labels for the data</li>
+  <li>A level of significance (usually 0.05)</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s">'a'</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s">'b'</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s">'c'</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">tukey_results</span> <span class="o">=</span> <span class="n">pairwise_tukeyhsd</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="binomial-test">Binomial Test</h3>
+<p>Compares an observed proportion to a theoretical ideal.
+Examples:</p>
+<ul>
+  <li>Comparing the actual percent of emails that were opened to the quarterly goals</li>
+  <li>Comparing the actual percentage of respondents who gave a certain survey response to the expected survey response</li>
+</ul>
+
+<p><strong>binom_test</strong> requires three arguments:</p>
+<ul>
+  <li>The number of successes (the numerator of your proportion)</li>
+  <li>n - the number of trials (the denominator of your proportion)</li>
+  <li>p - the proportion you are comparing to</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">pval</span> <span class="o">=</span> <span class="n">binomtest</span><span class="p">(</span><span class="n">numerator</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="n">denominator</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">proportion</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">pval</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="chi-squared-test">Chi Squared Test</h3>
+<p>If we have two or more categorical datasets that we want to compare, we should use a Chi Square test. It is useful in situations like:</p>
+<ul>
+  <li>An A/B test where half of users were shown a green submit button and the other half were shown a purple submit button. Was one group more likely to click the submit button?</li>
+  <li>Men and women were both given a survey asking “Which of the following three products is your favorite?” Did the men and women have significantly different preferences?</li>
+</ul>
+
+<p><strong>chi2_contingency</strong> requires a contingency table of all results:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">chi2</span><span class="p">,</span> <span class="n">pval</span><span class="p">,</span> <span class="n">dof</span><span class="p">,</span> <span class="n">expected</span> <span class="o">=</span> <span class="n">chi2_contenigency</span><span class="p">([</span><span class="n">cat1yes</span><span class="p">,</span> <span class="n">cat1no</span><span class="p">],</span>
+                                                  <span class="p">[</span><span class="n">cat2yes</span><span class="p">,</span> <span class="n">cat2no</span><span class="p">])</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">pval</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="use-case">Use Case</h2>
+
+<p>If we are going back to our example for a null hypothesis from above we can use either the 2 Sample T-Test (ttest_ind) or ANOVA. All approaches depend on how we are going to prepare the data.</p>
+
+<p>Let take a practical example and work through it on the Northwind database Microsoft provides.</p>
+
+<p>1. Join ‘OrderDetail’, ‘Product’ and ‘Category’ and assign meaningful names to the features:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">SELECT</span> <span class="n">OrderDetail</span><span class="p">.</span><span class="n">Id</span> <span class="n">orderdetail_id</span><span class="p">,</span>
+           <span class="n">OrderDetail</span><span class="p">.</span><span class="n">ProductId</span> <span class="n">orderdetail_prodid</span><span class="p">,</span>
+           <span class="n">OrderDetail</span><span class="p">.</span><span class="n">Quantity</span> <span class="n">orderdetail_quantity</span><span class="p">,</span>
+           <span class="n">OrderDetail</span><span class="p">.</span><span class="n">UnitPrice</span> <span class="n">orderdetail_unitprice</span><span class="p">,</span>
+           <span class="n">OrderDetail</span><span class="p">.</span><span class="n">Discount</span> <span class="n">orderdetail_discount</span><span class="p">,</span>
+           <span class="n">Product</span><span class="p">.</span><span class="n">Id</span> <span class="n">product_id</span><span class="p">,</span>
+           <span class="n">Category</span><span class="p">.</span><span class="n">Id</span> <span class="n">category_id</span><span class="p">,</span>
+           <span class="n">Category</span><span class="p">.</span><span class="n">CategoryName</span> <span class="n">category_name</span>
+    <span class="k">FROM</span> <span class="n">Category</span>
+    <span class="k">JOIN</span> <span class="n">Product</span> <span class="k">ON</span> <span class="n">Category</span><span class="p">.</span><span class="n">Id</span> <span class="o">=</span> <span class="n">Product</span><span class="p">.</span><span class="n">CategoryId</span>
+    <span class="k">JOIN</span> <span class="n">OrderDetail</span> <span class="k">ON</span> <span class="n">Product</span><span class="p">.</span><span class="n">Id</span> <span class="o">=</span> <span class="n">OrderDetail</span><span class="p">.</span><span class="n">ProductId</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_sql_query</span><span class="p">(</span><span class="n">your_sql_command</span><span class="p">,</span> <span class="n">engine</span><span class="p">)</span>
+</code></pre></div></div>
+<p>$\tiny \ast \text{ The SQL statement should be inside of ```}$</p>
+
+<p>2. Extract all ‘Unit price’ and split them into two lists for simplicity:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">d_df</span> <span class="o">=</span> <span class="n">Q2_df</span><span class="p">[</span><span class="s">'orderdetail_unitprice'</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Q2_df</span><span class="p">[</span><span class="s">'discount_bool'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">nd_df</span> <span class="o">=</span> <span class="n">Q2_df</span><span class="p">[</span><span class="s">'orderdetail_unitprice'</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Q2_df</span><span class="p">[</span><span class="s">'discount_bool'</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">discount</span> <span class="o">=</span> <span class="n">d_df</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">no_discount</span> <span class="o">=</span> <span class="n">nd_df</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>3. Run the 2 Sample T-Test (Note: the ttest_ind creates a readable statement:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">stats</span><span class="o">.</span><span class="n">ttest_ind</span><span class="p">(</span><span class="n">discount</span><span class="p">,</span> <span class="n">no_discount</span><span class="p">,</span> <span class="n">equal_var</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+    <span class="c1"># Ttest_indResult(statistic=-2.9756718793666415, pvalue=0.0034331287209264576)
+</span></code></pre></div></div>
+
+<p>4. As a final step we want to calculate the effect size using Cohen’s $d$. Cohen’s $d$ is typically used to represent the magnitude of differences between two (or more) groups on a given variable, with larger values representing a greater differentiation between the two groups on that variable.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">cohens_d</span> <span class="o">=</span> <span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">mean</span><span class="p">(</span><span class="n">y</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="n">sqrt</span><span class="p">((</span><span class="n">stdev</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">stdev</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Cohen's D: {}"</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="n">cohens_d</span><span class="p">))</span>
+    <span class="c1"># Cohen's D:  0.4564472299543739
+</span></code></pre></div></div>
+
+<p>5. Conclusion, because our p-value (0.0034) is not significant, we reject the null hypothesis in support of the alternative.</p>
+
+<h2 id="further-reading">Further Reading</h2>
+<p>Hypothesis Testing is a big topic, and this was just a quick overview of how someone can approach a question using Python. Here is a short list of resources that I fund helpful:</p>
+
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=5ABpqVSx33I&amp;feature=youtu.be">Z-statistics vs. T-statistics</a> - Khan Academy</li>
+  <li><a href="https://www.dataquest.io/blog/a-b-testing-the-definitive-guide-to-improving-your-product/">A/B Testing: The Definitive Guide to Improving Your Product</a> - Dataquest</li>
+  <li><a href="http://blog.minitab.com/blog/adventures-in-statistics-2/understanding-t-tests-1-sample-2-sample-and-paired-t-tests">Understanding t-Tests</a> - The Minitab Blog</li>
+  <li><a href="https://machinelearningmastery.com/effect-size-measures-in-python/">A Gentle Introduction to Effect Size Measures in Python</a> - Machine Learning Mastery</li>
+  <li><a href="https://garstats.wordpress.com/2016/05/02/robust-effect-sizes-for-2-independent-groups/">Robust effect sizes for 2 independent groups</a> - basic statistics</li>
+</ul>
+
+            </div>
+
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2018-12-17">17 Dec 2018</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/data-ocean.github.io/categories#beginner">beginner</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/data-ocean.github.io/categories#code">code</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/data-ocean.github.io/categories#data">data</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="http://localhost:4000/data-ocean.github.io/bayes_theorem/"> &laquo; Bayes' Theorem</a>
+            
+            
+            <a class="next d-block col-md-6 text-lg-right" href="http://localhost:4000/data-ocean.github.io/forest/">Forest Cover Type &raquo; </a>
+            
+            <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <!-- <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = '';
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section> -->
+
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+</div>
+
+
+
+</div>
+
+<!-- Categories Jumbotron
+================================================== -->
+<div class="jumbotron fortags">
+	<div class="d-md-flex h-100">
+		<div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div class="d-md-flex align-items-center justify-content-center h-100">
+                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
+            </div>
+		</div>
+		<div class="col-md-8 p-5 align-self-center text-center">
+            
+            
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#data">data (9)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#code">code (9)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#map">map (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#Bayes">Bayes (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#beginner">beginner (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#forest">forest (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#art">art (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#deep-learning">deep learning (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#diffusion-maps">diffusion maps (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#papers">papers (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#content">content (3)</a>
+                
+            
+            
+		</div>
+	</div>
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                Copyright © 2019 Data Ocean
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">
+                <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts
+================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="/data-ocean.github.io/assets/js/mediumish.js"></script>
+
+
+<script src="/data-ocean.github.io/assets/js/lazyload.js"></script>
+
+
+<script src="/data-ocean.github.io/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+<script id="dsq-count-scr" src="//.disqus.com/count.js"></script>
+
+
+</body>
+</html>

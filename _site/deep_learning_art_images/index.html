@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<link rel="icon" href="/data-ocean.github.io/assets/images/logo.png">
+
+<title>Deep Learning and Art Images | Data Ocean</title>
+
+<!-- Begin Jekyll SEO tag v2.5.0 -->
+<title>Deep Learning and Art Images | Data Ocean</title>
+<meta name="generator" content="Jekyll v3.8.5" />
+<meta property="og:title" content="Deep Learning and Art Images" />
+<meta name="author" content="stephan" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An interpretation of the paper" />
+<meta property="og:description" content="An interpretation of the paper" />
+<link rel="canonical" href="http://localhost:4000/data-ocean.github.io/deep_learning_art_images/" />
+<meta property="og:url" content="http://localhost:4000/data-ocean.github.io/deep_learning_art_images/" />
+<meta property="og:site_name" content="Data Ocean" />
+<meta property="og:image" content="http://localhost:4000/data-ocean.github.io/assets/images/GoogleArt_cropped.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2019-02-09T00:00:00-08:00" />
+<script type="application/ld+json">
+{"image":"http://localhost:4000/data-ocean.github.io/assets/images/GoogleArt_cropped.png","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/data-ocean.github.io/deep_learning_art_images/"},"url":"http://localhost:4000/data-ocean.github.io/deep_learning_art_images/","publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://localhost:4000/data-ocean.github.io/assets/images/logo.jpeg"},"name":"stephan"},"author":{"@type":"Person","name":"stephan"},"headline":"Deep Learning and Art Images","description":"An interpretation of the paper","datePublished":"2019-02-09T00:00:00-08:00","dateModified":"2019-02-09T00:00:00-08:00","@type":"BlogPosting","@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<link href="/data-ocean.github.io/assets/css/screen.css" rel="stylesheet">
+
+<link href="/data-ocean.github.io/assets/css/main.css" rel="stylesheet">
+
+<script src="/data-ocean.github.io/assets/js/jquery.min.js"></script>
+
+<!-- mathjax config similar to math.stackexchange -->
+<!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script> -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+
+</head>
+
+
+
+
+<body class="layout-post">
+	<!-- defer loading of font and font awesome -->
+	<noscript id="deferred-styles">
+		<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	</noscript>
+
+
+<!-- Begin Menu Navigation
+================================================== -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+
+    <div class="container pr-0">
+
+    <!-- Begin Logo -->
+    <a class="navbar-brand" href="/data-ocean.github.io/">
+    <img src="/data-ocean.github.io/assets/images/logo.jpeg" alt="Data Ocean">
+    </a>
+    <!-- End Logo -->
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMediumish">
+
+        <!-- Begin Menu -->
+
+            <ul class="navbar-nav ml-auto">
+
+                
+                <li class="nav-item">
+                
+                <a class="nav-link" href="/data-ocean.github.io/index.html">Blog</a>
+                </li>
+
+                <li class="nav-item">
+                <a class="nav-link" href="/data-ocean.github.io/about">About</a>
+                </li>
+<!--
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/"> Docs</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://www.wowthemes.net/themes/mediumish-wordpress/"><i class="fab fa-wordpress-simple"></i> WP Version</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://www.wowthemes.net/themes/mediumish-ghost/"><i class="fab fa-snapchat-ghost"></i> Ghost Version</a>
+                </li>
+
+                <li class="nav-item">
+                <a target="_blank" class="nav-link" href="https://github.com/wowthemesnet/mediumish-theme-jekyll"><i class="fab fa-github"></i> Fork on Github</a>
+                </li>
+-->
+
+                <script src="/data-ocean.github.io/assets/js/lunr.js"></script>
+
+
+<style>
+    .lunrsearchresult .title {color: #d9230f;}
+    .lunrsearchresult .url {color: silver;}
+    .lunrsearchresult a {display: block; color: #777;}
+    .lunrsearchresult a:hover, .lunrsearchresult a:focus {text-decoration: none;}
+    .lunrsearchresult a:hover .title {text-decoration: underline;}
+</style>
+
+
+<form class="bd-search" onSubmit="return lunr_search(document.getElementById('lunrsearch').value);">
+    <input type="text" class="form-control text-small launch-modal-search" id="lunrsearch" name="q" maxlength="255" value="" placeholder="Type and enter..."/>
+</form>
+
+<div id="lunrsearchresults">
+    <ul></ul>
+</div>
+
+<script src="/data-ocean.github.io/assets/js/lunrsearchengine.js"></script>
+
+            </ul>
+
+        <!-- End Menu -->
+
+    </div>
+
+    </div>
+</nav>
+<!-- End Navigation
+================================================== -->
+
+<div class="site-content">
+
+<div class="container">
+
+<!-- Site Title
+================================================== -->
+<div class="mainheading">
+    <h1 class="sitetitle">Data Ocean</h1>
+    <p class="lead">
+        A discovery into the world of data.
+    </p>
+</div>
+
+<!-- Content
+================================================== -->
+<div class="main-content">
+    <!-- Begin Article
+================================================== -->
+<div class="container">
+    <div class="row">
+
+        <!-- Post Share -->
+        <div class="col-md-2 pl-0">
+            <div class="share sticky-top sticky-top-offset">
+    <p>
+        Share
+    </p>
+    <ul>
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://twitter.com/intent/tweet?text=Deep Learning and Art Images&url=http://localhost:4000/data-ocean.github.io/deep_learning_art_images/" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://facebook.com/sharer.php?u=http://localhost:4000/data-ocean.github.io/deep_learning_art_images/" onclick="window.open(this.href, 'facebook-share', 'width=550,height=435');return false;">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+        </li>
+
+        <li class="ml-1 mr-1">
+            <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/data-ocean.github.io/deep_learning_art_images/" onclick="window.open(this.href, 'width=550,height=435');return false;">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+        </li>
+
+    </ul>
+    <!-- 
+    <div class="sep">
+    </div>
+    <ul>
+        <li>
+        <a class="small smoothscroll" href="#disqus_thread"></a>
+        </li>
+    </ul>
+     -->
+</div>
+
+        </div>
+
+        <!-- Post -->
+        
+
+        <div class="col-md-9 flex-first flex-md-unordered">
+            <div class="mainheading">
+
+                <!-- Author Box -->
+                
+                <div class="row post-top-meta">
+                    <div class="col-xs-12 col-md-3 col-lg-2 text-center text-md-left mb-4 mb-md-0">
+                        
+                        <img class="author-thumb" src="/data-ocean.github.io/assets/images/avatar.jpg" alt="Stephan">
+                        
+                    </div>
+                    <div class="col-xs-12 col-md-9 col-lg-10 text-center text-md-left">
+                        <a target="_blank" class="link-dark" href="https://data-ocean.github.io">Stephan</a><a target="_blank" href="https://twitter.com/sosterburg" class="btn follow">Follow</a>
+                        <span class="author-description">Computer graphics veteran with 30+ years experience on the quest to discover the world of data.</span>
+                    </div>
+                </div>
+                
+
+                <!-- Post Title -->
+                <h1 class="posttitle">Deep Learning and Art Images</h1>
+
+            </div>
+
+            <!-- Adsense if enabled from _config.yml (change your pub id and slot) -->
+            
+            <!-- End Adsense -->
+
+            <!-- Post Featured Image -->
+            
+
+            
+            <img class="featured-image img-fluid lazyimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAACCAQAAAA3fa6RAAAADklEQVR42mNkAANGCAUAACMAA2w/AMgAAAAASUVORK5CYII=" data-src="http://localhost:4000/data-ocean.github.io/assets/images/GoogleArt_cropped.png" alt="Deep Learning and Art Images">
+            
+
+            
+            <!-- End Featured Image -->
+
+            <!-- Post Content -->
+            <div class="article-post">
+                <!-- Toc if any -->
+                
+                <!-- End Toc -->
+                <p>At <a href="https://www.kaggle.com">kaggle</a> we can find a dataset containing a collection of art images of google images, yandex images and from <a href="http://rusmuseumvrm.ru/collections/?lang=en">The Virtual Russian Museum</a>. The dataset has about 9000 images with five categories:</p>
+<ol>
+  <li>Drawings and Watercolors</li>
+  <li>Paintings</li>
+  <li>Sculpture</li>
+  <li>Graphic Art</li>
+  <li>Iconography (old Russian art)</li>
+</ol>
+
+<p>Because it is a classification problem, I wanted to use my newly learned knowledge in deep learning and convolutional neural networks (CNN). However, first things first, the downloaded zip file has two more zip files, which it turns out are somewhat similar in context but not quiet. So I decided to combine the two into one dataset.</p>
+
+<h2 id="approach">Approach</h2>
+
+<p>When I started to research how to tackle the issue for image classification, I found three possible options:</p>
+<ul>
+  <li><code class="highlighter-rouge">train_test_split</code>, we have to create the train and test data ourselves.</li>
+  <li><code class="highlighter-rouge">flow_from_dataframe</code>, we need to create first the dataframe ourselves.</li>
+  <li><code class="highlighter-rouge">flow_from_dictonary</code>, here we don’t need to do any extra work.</li>
+</ul>
+
+<p>I, as you may guessed it already, opted for the later.</p>
+
+<h2 id="how-deep-is-too-deep">How deep is too deep?</h2>
+
+<p>To answer that question, here we need to know one fact first. I am working on a MacBook Pro (2015) with a 2.2 GHz Intel Core i7 processor and 16GB of RAM.</p>
+
+<p>So, how deep is too deep? How many layers can I run on my computer without feeling the pain? To find out I approached it very gingerly, step by step. Or shall I say layer by layer?</p>
+
+<p>For the first try, I had only a few layers, which helped with the computation time. However, the result showed a test accuracy of less than 50%.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">([</span>
+	<span class="n">Conv2D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">3</span><span class="p">)),</span>
+	<span class="n">MaxPooling2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+
+	<span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">),</span>
+	<span class="n">MaxPooling2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+
+	<span class="n">Flatten</span><span class="p">(),</span>
+	<span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">),</span>
+	<span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">),</span>
+	<span class="n">Dense</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'sigmoid'</span><span class="p">)</span>
+<span class="p">])</span>
+</code></pre></div></div>
+
+<p>To improve the test accuracy, I kept adding layers. I ended up adding several more layers, including <code class="highlighter-rouge">Dropout</code> layers to help to avoid over-fitting.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">Conv2D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">input_shape</span><span class="o">=</span><span class="n">input_shape</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">),</span>
+    <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+    <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+
+    <span class="n">Conv2D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">),</span>
+    <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+    <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+
+    <span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">),</span>
+    <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
+    <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+
+    <span class="n">Flatten</span><span class="p">(),</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">),</span>
+    <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">),</span>
+    <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'softmax'</span><span class="p">)</span>
+<span class="p">])</span>
+</code></pre></div></div>
+
+<p>With the simple sequential model the computational time wasn’t too bad but with the  model, seen above, the time went up from several minutes per epochs to nearly 30 minutes per epochs.</p>
+
+<h3 id="epochsbatch_size">epochs/batch_size</h3>
+
+<p>An <code class="highlighter-rouge">epochs</code> is an iteration over the entire provided data; for example, if we have <code class="highlighter-rouge">epochs=25</code> we iterate 25 times over the data. The <code class="highlighter-rouge">batch_size</code> is the number of samples that will propagate through the network, by default 32. In our case where we have about 8000 images in the training set, we have 250 batches per epochs.</p>
+
+<p>The question is, do we decrease the batch_size to 16 or increase the number to 64? If we decrease the number, we have 500 batches vs 125 batches if we increase the number. Large batch size result in faster processing time and vice versa. In regards to epochs, the model improves with more but only to a point. They start to plateau in accuracy as they converge.</p>
+
+<h2 id="pre-trained-network">Pre-Trained Network</h2>
+
+<p>To improve not only the accuracy but also the processing time (so I hoped), I decided to use a pre-trained network. There are a few we can choose from, for example <a href="https://keras.io/applications/#vgg16">VGG16</a>, <a href="https://keras.io/applications/#vgg19">VGG19</a>, <a href="https://keras.io/applications/#inceptionv3">InceptionV3</a>, and <a href="https://keras.io/applications/#resnet50">ResNet50</a> etcetera. I resorted to the <a href="https://arxiv.org/abs/1409.1556">VGG</a> model to keep it simple for the time being.</p>
+
+<p><strong>VGG</strong> is a convolutional neural network model for image recognition proposed by the <strong>Visual Geometry Group in the University of Oxford</strong>, where <em>VGG16</em> refers to a VGG model with 16 weight layers, and <em>VGG19</em> refers to a VGG model with 19 weight layers.</p>
+
+<p>Because we have an already trained model, all we have to do is add at least two more layers (<code class="highlighter-rouge">Flatten</code> and the output <code class="highlighter-rouge">Dense</code> layer) to test what the pre-trained network can do with our dataset. In my case I ended up adding six layers in total:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">vgg_model</span><span class="p">,</span>
+    <span class="n">Flatten</span><span class="p">(),</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">),</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">),</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">),</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'relu'</span><span class="p">),</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s">'softmax'</span><span class="p">)</span>
+<span class="p">])</span>
+</code></pre></div></div>
+
+<p>Now, the accuracy improved to 96.68%, up &gt;5% from my previous model, but not the processing time.</p>
+
+<h2 id="aws">AWS</h2>
+
+<p>In the end, it took several hours to run the model. Moreover, it makes it even more painful if you forget to change your default setting on your MacBook and the computer goes into sleep mode, and nothing get processed at all.</p>
+
+<p>To free up the computer I resorted to - welcome - <a href="https://www.paperspace.com">paperspace</a>.</p>
+
+<p>Which allows me to prototype locally (prove of concept) and compute in the cloud.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Use where you can pre-trained networks and if you are using large data use cloud services.</p>
+
+            </div>
+
+            <!-- Rating -->
+            
+
+            <!-- Post Date -->
+            <p>
+            <small>
+                <span class="post-date"><time class="post-date" datetime="2019-02-09">09 Feb 2019</time></span>           
+                
+                </small>
+            </p>
+
+            <!-- Post Categories -->
+            <div class="after-post-cats">
+                <ul class="tags mb-4">
+                    
+                    
+                    <li>
+                        <a class="smoothscroll" href="/data-ocean.github.io/categories#art">art</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/data-ocean.github.io/categories#beginner">beginner</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/data-ocean.github.io/categories#code">code</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/data-ocean.github.io/categories#data">data</a>
+                    </li>
+                    
+                    <li>
+                        <a class="smoothscroll" href="/data-ocean.github.io/categories#deep-learning">deep learning</a>
+                    </li>
+                    
+                </ul>
+            </div>
+            <!-- End Categories -->
+
+            <!-- Post Tags -->
+            <div class="after-post-tags">
+                <ul class="tags">
+                    
+                    
+                </ul>
+            </div>
+            <!-- End Tags -->
+
+            <!-- Prev/Next -->
+            <div class="row PageNavigation d-flex justify-content-between font-weight-bold">
+            
+            <a class="prev d-block col-md-6" href="http://localhost:4000/data-ocean.github.io/forest/"> &laquo; Forest Cover Type</a>
+            
+            
+            <a class="next d-block col-md-6 text-lg-right" href="http://localhost:4000/data-ocean.github.io/an_introductio_to_diffusion_maps/">A short introduction to Diffusion Maps &raquo; </a>
+            
+            <div class="clearfix"></div>
+            </div>
+            <!-- End Categories -->
+
+        </div>
+        <!-- End Post -->
+
+    </div>
+</div>
+<!-- End Article
+================================================== -->
+
+<!-- Begin Comments
+================================================== -->
+
+    <div class="container">
+        <div id="comments" class="row justify-content-center mb-5">
+            <div class="col-md-8">
+                <!-- <section class="disqus">
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = '';
+        var disqus_developer = 0;
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = window.location.protocol + '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</section> -->
+
+            </div>
+        </div>
+    </div>
+
+<!--End Comments
+================================================== -->
+
+<!-- Review with LD-JSON, adapt it for your needs if you like, but make sure you test the generated HTML source code first: 
+https://search.google.com/structured-data/testing-tool/u/0/
+================================================== -->
+
+</div>
+
+
+
+</div>
+
+<!-- Categories Jumbotron
+================================================== -->
+<div class="jumbotron fortags">
+	<div class="d-md-flex h-100">
+		<div class="col-md-4 transpdark align-self-center text-center h-100">
+            <div class="d-md-flex align-items-center justify-content-center h-100">
+                <h2 class="d-md-block align-self-center py-1 font-weight-light">Explore <span class="d-none d-md-inline">→</span></h2>
+            </div>
+		</div>
+		<div class="col-md-8 p-5 align-self-center text-center">
+            
+            
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#data">data (9)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#code">code (9)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#map">map (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#Bayes">Bayes (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#beginner">beginner (2)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#forest">forest (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#art">art (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#deep-learning">deep learning (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#diffusion-maps">diffusion maps (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#papers">papers (1)</a>
+                
+                    <a class="mt-1 mb-1" href="/data-ocean.github.io/categories#content">content (3)</a>
+                
+            
+            
+		</div>
+	</div>
+</div>
+
+<!-- Begin Footer
+================================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                Copyright © 2019 Data Ocean
+            </div>
+            <div class="col-md-6 col-sm-6 text-center text-lg-right">
+                <a target="_blank" href="https://www.wowthemes.net/mediumish-free-jekyll-template/">Mediumish Jekyll Theme</a> by WowThemes.net
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- End Footer
+================================================== -->
+
+</div> <!-- /.site-content -->
+
+<!-- Scripts
+================================================== -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+<script src="/data-ocean.github.io/assets/js/mediumish.js"></script>
+
+
+<script src="/data-ocean.github.io/assets/js/lazyload.js"></script>
+
+
+<script src="/data-ocean.github.io/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+<script id="dsq-count-scr" src="//.disqus.com/count.js"></script>
+
+
+</body>
+</html>
